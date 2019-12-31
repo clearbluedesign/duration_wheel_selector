@@ -190,8 +190,15 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
       }
     });
     if (widget.colonFormat == true) {
-      formattedTime.replaceRange(formattedTime.length-1, formattedTime.length-1, "") 
+      formattedTime = removeLastChar(formattedTime);
     }
     return formattedTime;
+  }
+  
+  String removeLastChar(String s) {
+    if (s == null || s.length == 0) {
+      return s;
+    }
+    return s.substring(0, s.length - 1);
   }
 }
