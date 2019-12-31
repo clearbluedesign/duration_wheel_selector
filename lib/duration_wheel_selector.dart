@@ -47,7 +47,7 @@ class DurationWheelSelector extends StatefulWidget {
   DurationWheelSelector({
     Key key,
     @required this.tickValue,
-    this.scrollController = ScrollController(),
+    ScrollController scrollController,
     this.onDurationChange,
     this.initialDuration,
     this.maxDuration,
@@ -63,7 +63,7 @@ class DurationWheelSelector extends StatefulWidget {
     this.showIcon = true,
     this.showLabel = true,
     this.stops = const [.03, .5, .97],
-  }) : super(key: key) {
+  }) : scrollController = scrollController ?? ScrollController(), super(key: key) {
     assert(this.tickValue != null);
     assert(this.tickWidth > 0.0);
     assert(this.maxDuration == null ||
@@ -129,9 +129,7 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
                   .createShader(bounds);
             },
             blendMode: BlendMode.dstIn,
-            child: Container(
-              height: 50,
-              child: ScrollSnapList(
+            child: ScrollSnapList(
                 listController: widget.scrollController,
                 updateOnScroll: true,
                 initialIndex:
@@ -154,7 +152,7 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
                   );
                 },
               ),
-            ),
+            
           ),
         ],
       ),
