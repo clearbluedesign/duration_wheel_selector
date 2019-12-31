@@ -5,7 +5,7 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class DurationWheelSelector extends StatefulWidget {
   final ScrollController scrollController;
-  
+
   final void Function(Duration) onDurationChange;
 
   // the amount each tick will increment/decrement
@@ -21,9 +21,14 @@ class DurationWheelSelector extends StatefulWidget {
   final Duration minDuration;
 
   // determines the amount of space between ticks
-  final double tickWidth;
+  final double tickSpacing;
 
-  // the widget centered in the tickWidth
+  // default tick params
+  final double tickWidth;
+  final double tickHeight;
+  final Color tickColor;
+
+  // non-deafult tick
   final Widget tick;
 
   // 12:26 vs 12h 26m
@@ -52,7 +57,10 @@ class DurationWheelSelector extends StatefulWidget {
     this.initialDuration,
     this.maxDuration,
     this.minDuration = Duration.zero,
-    this.tickWidth = 33.0,
+    this.tickSpacing = 33.0,
+    this.tickHeight = 28.0,
+    this.tickWidth = 1.0,
+    this.tickColor = Colors.black,
     this.tick,
     this.padding = const EdgeInsets.all(8),
     this.labelStyle =
@@ -63,7 +71,8 @@ class DurationWheelSelector extends StatefulWidget {
     this.showIcon = true,
     this.showLabel = true,
     this.stops = const [.03, .5, .97],
-  }) : scrollController = scrollController ?? ScrollController(), super(key: key) {
+  })  : scrollController = scrollController ?? ScrollController(),
+        super(key: key) {
     assert(this.tickValue != null);
     assert(this.tickWidth > 0.0);
     assert(this.maxDuration == null ||
@@ -98,7 +107,10 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
   }
 
   Widget defaultTick() {
-    return Container(width: 1, height: 28, color: Colors.black);
+    return Container(
+        width: widget.tickSpacing,
+        height: widget.tickHeight,
+        color: widget.tickColor);
   }
 
   @override
@@ -129,7 +141,9 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
                   .createShader(bounds);
             },
             blendMode: BlendMode.dstIn,
-            child: ScrollSnapList(
+            child: Container(
+              height: widget.tickHeight,
+              child: ScrollSnapList(
                 listController: widget.scrollController,
                 updateOnScroll: true,
                 initialIndex:
@@ -143,16 +157,16 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
                   if (widget.onDurationChange != null)
                     widget.onDurationChange(selectedDuration);
                 },
-                itemSize: widget.tickWidth,
+                itemSize: widget.tickSpacing,
                 itemCount: (itemCount != null) ? itemCount + 1 : null,
                 itemBuilder: (context, index) {
                   return Container(
-                    width: widget.tickWidth,
+                    width: widget.tickSpacing,
                     child: Center(child: _tick),
                   );
                 },
               ),
-            
+            ),
           ),
         ],
       ),
@@ -194,7 +208,7 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
     }
     return formattedTime;
   }
-  
+
   String removeLastChar(String s) {
     if (s == null || s.length == 0) {
       return s;
@@ -202,3 +216,4 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
     return s.substring(0, s.length - 1);
   }
 }
+
