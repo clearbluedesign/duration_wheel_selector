@@ -108,7 +108,7 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
 
   Widget defaultTick() {
     return Container(
-        width: widget.tickSpacing,
+        width: widget.tickWidth,
         height: widget.tickHeight,
         color: widget.tickColor);
   }
