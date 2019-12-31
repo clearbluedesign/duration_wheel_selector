@@ -187,6 +187,9 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
         duration -= Duration(milliseconds: duration.inMilliseconds);
       }
     });
+    if (widget.colonFormat == true) {
+      formattedTime.replaceRange(formattedTime.length-1, formattedTime.length-1, "") 
+    }
     return formattedTime;
   }
 }
