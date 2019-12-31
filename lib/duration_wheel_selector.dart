@@ -142,7 +142,7 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
                     widget.onDurationChange(selectedDuration);
                 },
                 itemSize: widget.tickWidth,
-                itemCount: itemCount: (itemCount != null) ? itemCount + 1 : null,
+                itemCount: (itemCount != null) ? itemCount + 1 : null,
                 itemBuilder: (context, index) {
                   return Container(
                     width: widget.tickWidth,
