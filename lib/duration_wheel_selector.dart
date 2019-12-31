@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class DurationWheelSelector extends StatefulWidget {
+  final ScrollController scrollController;
+  
   final void Function(Duration) onDurationChange;
 
   // the amount each tick will increment/decrement
@@ -45,6 +47,7 @@ class DurationWheelSelector extends StatefulWidget {
   DurationWheelSelector({
     Key key,
     @required this.tickValue,
+    this.scrollController = ScrollController(),
     this.onDurationChange,
     this.initialDuration,
     this.maxDuration,
@@ -129,6 +132,7 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
             child: Container(
               height: 50,
               child: ScrollSnapList(
+                listController: widget.scrollController,
                 updateOnScroll: true,
                 initialIndex:
                     selectedDuration.inSeconds / widget.tickValue.inSeconds,
