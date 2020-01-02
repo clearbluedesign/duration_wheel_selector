@@ -77,9 +77,9 @@ class DurationWheelSelector extends StatefulWidget {
     assert(this.tickWidth > 0.0);
     assert(this.maxDuration == null ||
         (this.maxDuration.compareTo(this.minDuration) > 0));
-    assert(this.maxDuration == null ||
-        this.initialDuration == null ||
-        (this.maxDuration.compareTo(this.initialDuration) >= 0));
+//     assert(this.maxDuration == null ||
+//         this.initialDuration == null ||
+//         (this.maxDuration.compareTo(this.initialDuration) >= 0));
   }
 
   @override
