@@ -58,7 +58,7 @@ class DurationWheelSelector extends StatefulWidget {
     this.maxDuration,
     this.minDuration = Duration.zero,
     this.tickSpacing = 33.0,
-    this.tickHeight = 44.0,
+    this.tickHeight = 28.0,
     this.tickWidth = 1.0,
     this.tickColor = Colors.black,
     this.tick,
@@ -124,7 +124,7 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
           if (widget.showLabel)
             Text(
               formatTime(selectedDuration),
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+              style: (labelStyle != null) ? labelStyle : TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
             ),
           if (widget.showIcon) widget.icon,
           ShaderMask(
