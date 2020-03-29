@@ -124,7 +124,7 @@ class _DurationWheelSelectorState extends State<DurationWheelSelector> {
           if (widget.showLabel)
             Text(
               formatTime(selectedDuration),
-              style: (labelStyle != null) ? labelStyle : TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+              style: labelStyle
             ),
           if (widget.showIcon) widget.icon,
           ShaderMask(
